@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/pessoa/cadastrar"><i class="far fa-address-card"></i> Cadastrar Novo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center text-warning">Lista de Pessoas</h3>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4">
+                <form action="/pessoa/index" method="get">
+                    <input type="text" name="busca" value="@Request.QueryString["busca"]" autofocus placeholder="Buscar pessoa" />
+                    <button class="btn btn-info" type="submit">
+                        <i class="fas fa-glasses"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="col-8">
+                <div class="float-right">
+                    <a href="/pessoa/cadastrar" class="btn btn-default"><i class="far fa-address-card"></i> Cadastrar Pessoa</a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="coluna-codigo">Codigo</th>
+                    <th class="coluna-nome">Nome</th>
+                    <th class="coluna-cpf">Cpf</th>
+                    <th class="coluna-rg">Rg</th>
+                    <th class="coluna-dataNascimento">Data de Nasicmento</th>
+                    <th class="coluna-sexo">Sexo</th>
+                    <th class="coluna-idade">Idade</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Web02.Models.Pessoa pessoa in ViewBag.Pessoas)
+                {
+                    <tr>
+                        <td>@pessoa.Id</td>
+                        <td>@pessoa.Nome</td>
+                        <td>@pessoa.Cpf</td>
+                        <td>@pessoa.Rg</td>
+                        <td>@pessoa.DataNascimento</td>
+                        <td>@pessoa.Sexo</td>
+                        <td>@pessoa.Idade</td>
+                        <td>
+
+                            <a href="/pessoa/editar/@pessoa.Id" class="text-success mr-2"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Editar Pessoa"><i class="fas fa-user-edit"></i></a>
+                            <a href="/pessoa/delete/@pessoa.Id" class="text-danger"><i class="fas fa-user-minus"></i></a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="coluna-codigo">Codigo</th>
+                    <th class="coluna-nome">Nome</th>
+                    <th class="coluna-cpf">Cpf</th>
+                    <th class="coluna-rg">Rg</th>
+                    <th class="coluna-dataNascimento">Data de Nasicmento</th>
+                    <th class="coluna-sexo">Sexo</th>
+                    <th class="coluna-idade">Idade</th>
+                    <th>Ação</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</body>
+</html>
